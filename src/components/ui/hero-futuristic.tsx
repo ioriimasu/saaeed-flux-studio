@@ -25,8 +25,8 @@ import {
   add
 } from 'three/tsl';
 
-const TEXTUREMAP = { src: 'https://i.postimg.cc/XYwvXN8D/img-4.png' };
-const DEPTHMAP = { src: 'https://i.postimg.cc/2SHKQh2q/raw-4.webp' };
+const TEXTUREMAP = { src: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop&crop=center' };
+const DEPTHMAP = { src: 'https://images.unsplash.com/photo-1506905925346-04b1e767261a?w=800&h=600&fit=crop&crop=center' };
 
 extend(THREE as any);
 
@@ -176,7 +176,7 @@ const Scene = () => {
   );
 };
 
-export const Html = () => {
+export const HeroFuturistic = () => {
   const titleWords = 'Build Your Dreams'.split(' ');
   const subtitle = 'AI-powered creativity for the next generation.';
   const [visibleWords, setVisibleWords] = useState(0);
@@ -208,8 +208,8 @@ export const Html = () => {
             {titleWords.map((word, index) => (
               <div
                 key={index}
-                className={index < visibleWords ? 'fade-in' : ''}
-                style={{ animationDelay: `${index * 0.13 + (delays[index] || 0)}s`, opacity: index < visibleWords ? undefined : 0 }}
+                className={`${index < visibleWords ? 'fade-in' : 'opacity-0'}`}
+                style={{ animationDelay: `${index * 0.13 + (delays[index] || 0)}s` }}
               >
                 {word}
               </div>
@@ -218,8 +218,8 @@ export const Html = () => {
         </div>
         <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold">
           <div
-            className={subtitleVisible ? 'fade-in-subtitle' : ''}
-            style={{ animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s`, opacity: subtitleVisible ? undefined : 0 }}
+            className={`${subtitleVisible ? 'fade-in-subtitle' : 'opacity-0'}`}
+            style={{ animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s` }}
           >
             {subtitle}
           </div>
@@ -241,6 +241,11 @@ export const Html = () => {
 
       <Canvas
         flat
+        gl={async (props) => {
+          const renderer = new THREE.WebGPURenderer(props as any);
+          await renderer.init();
+          return renderer;
+        }}
       >
         <PostProcessing fullScreenEffect={true} />
         <Scene />
@@ -249,4 +254,4 @@ export const Html = () => {
   );
 };
 
-export default Html;
+export default HeroFuturistic;

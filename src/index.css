@@ -232,6 +232,68 @@
     @apply h-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-full;
     transition: width 0.3s ease;
   }
+
+  /* Hero Futuristic Component Styles */
+  .fade-in {
+    animation: fadeInGlitch 0.8s ease-out forwards;
+  }
+
+  .fade-in-subtitle {
+    animation: fadeInSubtitle 1s ease-out forwards;
+  }
+
+  .explore-btn {
+    @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50;
+    @apply px-8 py-4 bg-transparent border-2 border-white/30 rounded-full;
+    @apply text-white font-medium text-sm uppercase tracking-wider;
+    @apply backdrop-blur-sm transition-all duration-500;
+    @apply hover:border-white/60 hover:bg-white/10;
+    @apply focus:outline-none focus:ring-2 focus:ring-white/50;
+    opacity: 0;
+    animation: fadeInButton 1s ease-out forwards;
+  }
+
+  .explore-btn:hover {
+    transform: translate(-50%, -4px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  }
+
+  .explore-arrow {
+    @apply ml-3 inline-block transition-transform duration-300;
+  }
+
+  .explore-btn:hover .explore-arrow {
+    transform: translateY(2px);
+  }
+
+  .arrow-svg {
+    @apply transition-all duration-300;
+  }
+
+  .explore-btn:hover .arrow-svg {
+    transform: translateY(2px);
+  }
+
+  /* Splash Cursor Component Styles */
+  .splash-cursor-container {
+    @apply fixed top-0 left-0 w-full h-full pointer-events-none;
+    z-index: 50;
+  }
+
+  .splash-cursor-canvas {
+    @apply w-full h-full opacity-80;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
+  }
+
+  .splash-cursor-canvas:hover {
+    @apply opacity-90;
+  }
+
+  .splash-cursor-overlay {
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
 }
 
 @layer utilities {
@@ -254,6 +316,68 @@
   @keyframes text-shimmer {
     0% { background-position: -200% center; }
     100% { background-position: 200% center; }
+  }
+
+  @keyframes fadeInGlitch {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) skewX(-5deg);
+      filter: blur(2px);
+    }
+    20% {
+      opacity: 0.8;
+      transform: translateY(10px) skewX(2deg);
+      filter: blur(1px);
+    }
+    40% {
+      opacity: 0.6;
+      transform: translateY(-5px) skewX(-1deg);
+      filter: blur(0.5px);
+    }
+    60% {
+      opacity: 0.9;
+      transform: translateY(2px) skewX(1deg);
+      filter: blur(0px);
+    }
+    80% {
+      opacity: 0.7;
+      transform: translateY(-1px) skewX(-0.5deg);
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) skewX(0deg);
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes fadeInSubtitle {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      filter: blur(3px);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(15px) scale(0.98);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes fadeInButton {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 20px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
   }
 
   .animate-float {
