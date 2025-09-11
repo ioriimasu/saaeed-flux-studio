@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
-import Navigation from '@/components/Navigation';
 import Preloader from '@/components/Preloader';
 import Projects from '@/components/Projects';
 
@@ -31,7 +30,6 @@ const Index = () => {
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
       <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        <Navigation />
         <main>
           <Hero />
           <About />

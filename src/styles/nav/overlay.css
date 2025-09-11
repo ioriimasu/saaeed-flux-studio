@@ -1,0 +1,211 @@
+/* Navigation Overlay Styles */
+
+/* Reduced motion fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  .nav-overlay,
+  .nav-content,
+  .nav-link {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+  
+  .nav-content {
+    transform: none !important;
+  }
+}
+
+/* Menu button hover effects */
+.nav-menu-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-menu-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.nav-menu-button:hover::before {
+  left: 100%;
+}
+
+/* Overlay backdrop */
+.nav-backdrop {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glass morphism effect */
+.nav-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation links */
+.nav-link {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-foreground));
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Focus styles for accessibility */
+.nav-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Keyboard navigation indicator */
+.nav-link:focus-visible::before {
+  content: '→';
+  position: absolute;
+  left: -2rem;
+  color: var(--primary);
+  font-weight: bold;
+  opacity: 0;
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Overlay animations */
+.nav-overlay-enter {
+  opacity: 0;
+}
+
+.nav-overlay-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.nav-overlay-exit {
+  opacity: 1;
+}
+
+.nav-overlay-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Content animations */
+.nav-content-enter {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+}
+
+.nav-content-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-content-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.nav-content-exit-active {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Link stagger animation */
+.nav-link-stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: linkStagger 0.6s ease forwards;
+}
+
+@keyframes linkStagger {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Drawer variant specific styles */
+.nav-drawer {
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.nav-drawer .nav-content {
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Fullscreen variant specific styles */
+.nav-fullscreen .nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .nav-content {
+    padding: 1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nav-glass {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--foreground);
+  }
+  
+  .nav-link::after {
+    background: var(--foreground);
+    height: 3px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .nav-menu-button,
+  .nav-overlay {
+    display: none !important;
+  }
+}
