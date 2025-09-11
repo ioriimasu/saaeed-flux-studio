@@ -1,13 +1,13 @@
+import { OptimizedImage } from '@/components/ui/optimized-image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, X, GithubLogo, Globe } from 'phosphor-react';
+import { ArrowRight, GithubLogo, Globe, X } from 'phosphor-react';
 import { useEffect, useRef, useState } from 'react';
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { OptimizedImage } from '@/components/ui/optimized-image';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
