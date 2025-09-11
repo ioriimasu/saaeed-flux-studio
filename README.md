@@ -1,6 +1,6 @@
-# SAAEED FLUX STUDIO
+# IORIIMASU
 
-A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and shadcn/ui components. Features 3D graphics, animations, and a sleek design.
+A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and shadcn/ui components. Features 3D graphics, animations, and a sleek design showcasing professional work and expertise.
 
 ## 🚀 Quick Start
 
@@ -14,7 +14,7 @@ A modern, responsive portfolio website built with React, TypeScript, Tailwind CS
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd saaeed-flux-studio
+cd ioriimasu
 
 # Install dependencies
 npm install

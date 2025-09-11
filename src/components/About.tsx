@@ -30,13 +30,6 @@ const About = () => {
     { name: 'CI/CD (GitHub Actions)', icon: PaintBrush, level: 85 },
   ];
 
-  const timeline = [
-    { year: '2020', title: 'Started RFID/IoT development' },
-    { year: '2021', title: 'First SaaS platform architecture' },
-    { year: '2022', title: 'Factory intelligence systems' },
-    { year: '2023', title: 'Multi-tenant platform scaling' },
-    { year: '2024', title: 'Mission-critical system deployments' },
-  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {

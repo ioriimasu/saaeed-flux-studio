@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+
 import Navigation from '@/components/Navigation';
 
 // Mock GSAP

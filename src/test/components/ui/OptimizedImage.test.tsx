@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
 // Mock IntersectionObserver
@@ -10,9 +11,6 @@ mockIntersectionObserver.mockReturnValue({
   disconnect: () => null,
 });
 window.IntersectionObserver = mockIntersectionObserver;
-
-// Mock fireEvent
-import { fireEvent } from '@testing-library/react';
 
 describe('OptimizedImage', () => {
   it('renders image with correct attributes when priority is true', () => {

@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps {
   src: string;
@@ -26,8 +27,8 @@ export function OptimizedImage({
   priority = false,
   placeholder = "empty",
   blurDataURL,
-  sizes = "100vw",
-  quality = 75,
+  sizes: _sizes = "100vw",
+  quality: _quality = 75,
   loading = "lazy",
   onLoad,
   onError,
