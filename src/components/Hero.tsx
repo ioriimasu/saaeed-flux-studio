@@ -140,7 +140,7 @@ const Hero = () => {
           className="btn-neon group text-primary-foreground inline-flex items-center space-x-3 text-lg"
           aria-label="Navigate to contact section to hire me"
         >
-          <span>Hire Me</span>
+          <span>Let's Build Together</span>
           <ArrowRight 
             size={20} 
             className="group-hover:translate-x-1 transition-transform duration-300" 

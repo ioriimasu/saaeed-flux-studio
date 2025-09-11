@@ -22,20 +22,20 @@ const About = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   const skills = [
-    { name: 'React.js', icon: Code, level: 95 },
-    { name: 'Next.js', icon: Globe, level: 90 },
-    { name: 'TailwindCSS', icon: PaintBrush, level: 95 },
-    { name: 'GSAP', icon: Lightning, level: 85 },
-    { name: 'Node.js', icon: Database, level: 80 },
-    { name: 'Three.js', icon: Cube, level: 75 },
+    { name: 'Next.js (TypeScript, Tailwind, App Router)', icon: Globe, level: 95 },
+    { name: 'Supabase (auth, real-time)', icon: Database, level: 90 },
+    { name: 'Stripe (SaaS billing)', icon: Lightning, level: 85 },
+    { name: 'Python (data + IoT integrations)', icon: Code, level: 80 },
+    { name: 'Cloud (Vercel, AWS basics)', icon: Cube, level: 75 },
+    { name: 'CI/CD (GitHub Actions)', icon: PaintBrush, level: 85 },
   ];
 
   const timeline = [
-    { year: '2020', title: 'Freelance beginnings' },
-    { year: '2021', title: 'First GSAP landing page' },
-    { year: '2022', title: 'Full-stack apps with Next.js & MongoDB' },
-    { year: '2023', title: 'Motion design focus' },
-    { year: '2024', title: '3D + immersive experiences' },
+    { year: '2020', title: 'Started RFID/IoT development' },
+    { year: '2021', title: 'First SaaS platform architecture' },
+    { year: '2022', title: 'Factory intelligence systems' },
+    { year: '2023', title: 'Multi-tenant platform scaling' },
+    { year: '2024', title: 'Mission-critical system deployments' },
   ];
 
   useEffect(() => {
@@ -165,17 +165,19 @@ const About = () => {
           {/* Content */}
           <div ref={contentRef} className="space-y-6">
             <h3 className="text-3xl font-light text-neon-accent">
-              Creative Technologist
+              Platform Architect · RFID · SaaS
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm Saaed Imam, a full-stack web developer passionate about blending 
-              design, code, and motion. My focus is building immersive, high-performance 
-              digital experiences with React, Next.js, and GSAP.
+              Architect and engineer with focus on RFID/IoT systems, scalable SaaS platforms, 
+              and industrial analytics. Passionate about clean systems, typed APIs, observability, 
+              and building rigorously from day one.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I love pushing interfaces beyond static screens—into dynamic, cinematic, 
-              and interactive journeys that engage users and create memorable experiences.
-            </p>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>📍 Based in Bangladesh (UTC+6)</p>
+              <p>🌐 Languages: English, Bangla</p>
+              <p>⚡ Focus: SaaS Architecture, RFID/IoT, Factory Intelligence</p>
+              <p>📬 Email: sayedimam.fahim@gmail.com</p>
+            </div>
           </div>
         </div>
 
@@ -207,18 +209,23 @@ const About = () => {
         {/* Career Timeline */}
         <div>
           <h3 className="text-3xl font-light text-center mb-12">
-            Career <span className="text-neon-accent">Timeline</span>
+            Key <span className="text-neon-accent">Expertise</span>
           </h3>
           <div ref={timelineRef} className="space-y-6 max-w-3xl mx-auto">
-            {timeline.map((item, _index) => (
-              <div key={item.year} className="flex items-center space-x-6 glass-card p-6 hover:scale-105 transition-transform duration-300">
+            {[
+              { icon: "🏭", title: "RFID & IoT Systems", desc: "Real-time data collection, device integrations, factory pipelines" },
+              { icon: "☁️", title: "SaaS Architecture", desc: "Multi-tenant systems, billing, auth, secure APIs" },
+              { icon: "📊", title: "Industrial Analytics", desc: "Dashboards, live metrics, operational intelligence" }
+            ].map((item, _index) => (
+              <div key={item.title} className="flex items-center space-x-6 glass-card p-6 hover:scale-105 transition-transform duration-300">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
-                    {item.year}
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
+                    {item.icon}
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-lg text-foreground">{item.title}</p>
+                  <h4 className="text-lg font-medium text-foreground">{item.title}</h4>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               </div>

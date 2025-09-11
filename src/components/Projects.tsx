@@ -32,69 +32,69 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Neon Portfolio",
-      description: "A futuristic personal portfolio with 3D elements and advanced animations.",
-      fullDescription: "A cutting-edge portfolio website featuring interactive 3D models, advanced GSAP animations, and immersive user experiences. Built with Next.js, Three.js, and Tailwind CSS.",
+      title: "TextileTrack — Realtime RFID Dashboard",
+      description: "Live RFID tracking for garment factories with throughput analytics and line efficiency.",
+      fullDescription: "Real-time RFID tracking system for garment factories featuring live alerts, throughput analytics, and line efficiency monitoring. Built with Supabase, WebSockets, and Next.js for mission-critical industrial operations.",
       image: "/lovable-uploads/26bd8d3a-1bf7-4a49-8cef-aeb29cb90b6e.png",
-      technologies: ["Next.js", "Three.js", "GSAP", "Tailwind CSS"],
+      technologies: ["Next.js", "Supabase", "WebSockets", "TypeScript"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "3D Web"
+      category: "RFID/IoT"
     },
     {
       id: 2,
-      title: "Cinematic Landing Page",
-      description: "High-impact landing page with scroll-triggered animations and video backgrounds.",
-      fullDescription: "A cinematic landing page designed to captivate users with smooth scroll animations, video backgrounds, and interactive elements. Features advanced GSAP timelines and responsive design.",
+      title: "StitchOS — The Connected Loom",
+      description: "SaaS middleware platform for textile manufacturing with event-driven architecture.",
+      fullDescription: "Enterprise SaaS middleware platform for textile manufacturing featuring secure multi-tenancy, event-driven architecture, and machine-to-cloud integrations. Focus on scalable industrial connectivity.",
       image: "/lovable-uploads/a08edc0f-567f-4257-bcd5-c015f71bde3d.png",
-      technologies: ["React", "GSAP", "Video.js", "CSS3"],
+      technologies: ["Next.js", "Supabase", "Stripe", "PostgreSQL"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "Motion Design"
+      category: "SaaS Platform"
     },
     {
       id: 3,
-      title: "E-Commerce Motion",
-      description: "Dynamic e-commerce platform with micro-interactions and smooth transitions.",
-      fullDescription: "A modern e-commerce platform featuring fluid product animations, cart interactions, and seamless checkout flow. Built with React, Node.js, and MongoDB.",
+      title: "Kattali Textile Ltd Corporate Site",
+      description: "Marketing + CMS site for enterprise textile group with high SEO performance.",
+      fullDescription: "Corporate marketing website for enterprise textile group featuring Next.js 14 with App Router, high Lighthouse SEO scores, and full WCAG accessibility compliance. Fully responsive design.",
       image: "/lovable-uploads/3cae342e-a061-4c45-a21b-f09898b8c741.png",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      technologies: ["Next.js 14", "App Router", "Tailwind CSS", "SEO"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "Full-Stack"
+      category: "Corporate Web"
     },
     {
       id: 4,
-      title: "3D Product Demo",
-      description: "Interactive 3D product showcase with real-time configurator.",
-      fullDescription: "An immersive 3D product demonstration platform allowing users to interact with products in real-time, customize features, and experience products before purchase.",
+      title: "RFID Line Analytics",
+      description: "Bottleneck detection using Little's Law with real-time operational graphs.",
+      fullDescription: "Advanced analytics system for RFID production lines using Little's Law for bottleneck detection. Delivered 30-40% operational time savings through real-time performance monitoring and predictive analytics.",
       image: "/lovable-uploads/93ae51ee-4ecd-47f7-8fce-cb86d8ed11ac.png",
-      technologies: ["Three.js", "React", "WebGL", "Blender"],
+      technologies: ["Python", "D3.js", "PostgreSQL", "Real-time Analytics"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "3D Web"
+      category: "Industrial Analytics"
     },
     {
       id: 5,
-      title: "Interactive Dashboard",
-      description: "Real-time data visualization dashboard with advanced charts and analytics.",
-      fullDescription: "A comprehensive dashboard for data visualization featuring real-time updates, interactive charts, and advanced analytics. Built with React, D3.js, and WebSocket connections.",
+      title: "STRYV — Brand & Shop",
+      description: "Headless e-commerce site with sleek minimal UX and commerce backend.",
+      fullDescription: "Modern headless e-commerce platform featuring sleek minimal user experience, built with Next.js and integrated commerce backend. Focus on performance and user experience optimization.",
       image: "/lovable-uploads/9b6cca2a-f012-4c7c-a9c6-a6770afab849.png",
-      technologies: ["React", "D3.js", "WebSocket", "Node.js"],
+      technologies: ["Next.js", "Headless Commerce", "Stripe", "Tailwind CSS"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "Data Viz"
+      category: "E-commerce"
     },
     {
       id: 6,
-      title: "Creative Coding Experiments",
-      description: "Collection of creative coding experiments and generative art pieces.",
-      fullDescription: "A curated collection of creative coding experiments exploring generative art, interactive installations, and experimental web technologies using p5.js and WebGL.",
+      title: "Iori Systems",
+      description: "Personal tooling platform with MCP agents and automation pipelines.",
+      fullDescription: "Personal developer productivity platform featuring MCP agents, automation pipelines, and developer productivity stack. Built for internal tooling and workflow optimization.",
       image: "/lovable-uploads/4823644a-6831-4a67-ac9e-d40dd1e91e1e.png",
-      technologies: ["p5.js", "WebGL", "Canvas API", "JavaScript"],
+      technologies: ["Python", "MCP Agents", "Automation", "Developer Tools"],
       github: "https://github.com",
       live: "https://example.com",
-      category: "Creative"
+      category: "Developer Tools"
     }
   ];
 

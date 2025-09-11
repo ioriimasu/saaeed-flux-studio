@@ -112,7 +112,7 @@ const Contact = () => {
     {
       name: 'Email',
       icon: EnvelopeSimple,
-      href: 'mailto:saaed@example.com',
+      href: 'mailto:sayedimam.fahim@gmail.com',
       color: 'hover:text-secondary'
     }
   ];
@@ -135,11 +135,11 @@ const Contact = () => {
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-light mb-6">
-            Let's <span className="text-neon-primary">Connect</span>
+            Let's build what moves the <span className="text-neon-primary">factory forward</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Let's collaborate to build something immersive and modern. I'm always open to 
-            exciting opportunities, freelance projects, and creative partnerships.
+            Available for advisory, architecture, and select build partnerships. 
+            Let's discuss your RFID/IoT systems, SaaS platforms, and industrial analytics needs.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6" />
         </div>
@@ -255,23 +255,23 @@ const Contact = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
                 <ChatCircle size={32} className="text-primary-foreground" aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-medium mb-3">Quick Response</h3>
+              <h3 className="text-xl font-medium mb-3">Direct Email</h3>
               <p className="text-muted-foreground mb-6">
-                Need a faster response? Let's chat directly!
+                For immediate response, reach out directly via email.
               </p>
-              <button 
-                className="btn-neon"
-                aria-label="Start a chat conversation"
-                onClick={() => {/* TODO: Implement chat functionality */}}
+              <a 
+                href="mailto:sayedimam.fahim@gmail.com"
+                className="btn-neon inline-block"
+                aria-label="Send email to sayedimam.fahim@gmail.com"
               >
-                Start Chat
-              </button>
+                Email Me
+              </a>
             </div>
 
             {/* Social Links */}
             <div className="glass-card p-8">
               <h3 className="text-xl font-medium mb-6 text-center">
-                Connect on Social
+                Connect & Follow
               </h3>
               <div ref={socialRef} className="flex justify-center space-x-6" role="list" aria-label="Social media links">
                 {socialLinks.map((social) => (
@@ -294,11 +294,11 @@ const Contact = () => {
             <div className="glass-card p-8 text-center">
               <h3 className="text-xl font-medium mb-4">Get in Touch</h3>
               <div className="space-y-3 text-muted-foreground">
-                <p>📧 saaed@example.com</p>
-                <p>📱 +1 (555) 123-4567</p>
-                <p>📍 San Francisco, CA</p>
+                <p>📧 sayedimam.fahim@gmail.com</p>
+                <p>📍 Based in Bangladesh (UTC+6)</p>
+                <p>🌐 Languages: English, Bangla</p>
                 <p className="text-accent font-medium mt-4">
-                  Available for freelance work
+                  Available for advisory & architecture
                 </p>
               </div>
             </div>
