@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ArrowRight } from 'phosphor-react';
+import { useEffect, useRef, useState } from 'react';
 
 const Hero = () => {
   const [currentTagline, setCurrentTagline] = useState(0);
@@ -11,9 +11,9 @@ const Hero = () => {
   const splineRef = useRef<HTMLDivElement>(null);
 
   const taglines = [
-    "Full-Stack Developer + Creative Technologist",
-    "Bringing design and engineering together",
-    "Building interfaces that feel alive"
+    "Build the future. Ship relentlessly.",
+    "Engineering systems that compound",
+    "Real-time RFID, mission-critical SaaS, and factory intelligence"
   ];
 
   useEffect(() => {
@@ -85,6 +85,8 @@ const Hero = () => {
     <section 
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      role="banner"
+      aria-label="Hero section"
     >
       {/* Background Spline */}
       <div 
@@ -97,6 +99,8 @@ const Hero = () => {
           width='100%' 
           height='100%'
           className="w-full h-full"
+          title="Interactive 3D background animation"
+          aria-hidden="true"
         />
       </div>
 
@@ -119,7 +123,7 @@ const Hero = () => {
           </span>
           <br />
           <span className="text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-light">
-            I craft futuristic web experiences
+            Platform Architect · RFID · SaaS
           </span>
         </h1>
 
@@ -134,17 +138,26 @@ const Hero = () => {
           ref={ctaRef}
           onClick={scrollToContact}
           className="btn-neon group text-primary-foreground inline-flex items-center space-x-3 text-lg"
+          aria-label="Navigate to contact section to hire me"
         >
           <span>Hire Me</span>
           <ArrowRight 
             size={20} 
             className="group-hover:translate-x-1 transition-transform duration-300" 
+            aria-hidden="true"
           />
         </button>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+      <div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        role="button"
+        tabIndex={0}
+        onClick={scrollToContact}
+        onKeyDown={(e) => e.key === 'Enter' && scrollToContact()}
+        aria-label="Scroll down to see more content"
+      >
         <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex justify-center">
           <div className="w-1 h-3 bg-muted-foreground rounded-full mt-2 animate-bounce" />
         </div>

@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  PaperPlaneTilt, 
-  GithubLogo, 
-  LinkedinLogo, 
-  EnvelopeSimple,
-  ChatCircle 
+import {
+    ChatCircle,
+    EnvelopeSimple,
+    GithubLogo,
+    LinkedinLogo,
+    PaperPlaneTilt
 } from 'phosphor-react';
+import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +80,7 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (_data: FormData) => {
     setIsSubmitting(true);
     
     // Simulate API call
@@ -88,7 +88,7 @@ const Contact = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       setSubmitStatus('success');
       reset();
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -122,6 +122,8 @@ const Contact = () => {
       ref={sectionRef}
       id="contact"
       className="section-margin section-padding relative"
+      role="region"
+      aria-label="Contact section"
     >
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -149,20 +151,25 @@ const Contact = () => {
               Send a Message
             </h3>
             
-            <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6" role="form" aria-label="Contact form">
               <div>
+                <label htmlFor="name" className="sr-only">Your Name</label>
                 <input
                   {...register('name', { required: 'Name is required' })}
+                  id="name"
                   type="text"
                   placeholder="Your Name"
                   className="input-glass"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                 />
                 {errors.name && (
-                  <p className="text-destructive text-sm mt-2">{errors.name.message}</p>
+                  <p id="name-error" className="text-destructive text-sm mt-2" role="alert">{errors.name.message}</p>
                 )}
               </div>
 
               <div>
+                <label htmlFor="email" className="sr-only">Your Email</label>
                 <input
                   {...register('email', { 
                     required: 'Email is required',
@@ -171,24 +178,31 @@ const Contact = () => {
                       message: 'Invalid email address'
                     }
                   })}
+                  id="email"
                   type="email"
                   placeholder="Your Email"
                   className="input-glass"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                 />
                 {errors.email && (
-                  <p className="text-destructive text-sm mt-2">{errors.email.message}</p>
+                  <p id="email-error" className="text-destructive text-sm mt-2" role="alert">{errors.email.message}</p>
                 )}
               </div>
 
               <div>
+                <label htmlFor="message" className="sr-only">Your Message</label>
                 <textarea
                   {...register('message', { required: 'Message is required' })}
+                  id="message"
                   placeholder="Your Message"
                   rows={6}
                   className="input-glass resize-none"
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "message-error" : undefined}
                 />
                 {errors.message && (
-                  <p className="text-destructive text-sm mt-2">{errors.message.message}</p>
+                  <p id="message-error" className="text-destructive text-sm mt-2" role="alert">{errors.message.message}</p>
                 )}
               </div>
 
@@ -198,10 +212,12 @@ const Contact = () => {
                 className={`btn-neon w-full group inline-flex items-center justify-center space-x-3 ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
+                aria-label={isSubmitting ? "Sending message" : "Send message"}
+                aria-describedby="submit-status"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" aria-hidden="true" />
                     <span>Sending...</span>
                   </>
                 ) : (
@@ -209,23 +225,26 @@ const Contact = () => {
                     <span>Send Message</span>
                     <PaperPlaneTilt 
                       size={20} 
-                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" 
+                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                      aria-hidden="true"
                     />
                   </>
                 )}
               </button>
 
               {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center">
-                  Message sent successfully! I'll get back to you soon.
-                </div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-center">
-                  Something went wrong. Please try again.
-                </div>
-              )}
+              <div id="submit-status" role="status" aria-live="polite">
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center">
+                    Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-center">
+                    Something went wrong. Please try again.
+                  </div>
+                )}
+              </div>
             </form>
           </div>
 
@@ -234,13 +253,17 @@ const Contact = () => {
             {/* Chat Bot Suggestion */}
             <div className="glass-card p-8 text-center">
               <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
-                <ChatCircle size={32} className="text-primary-foreground" />
+                <ChatCircle size={32} className="text-primary-foreground" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-medium mb-3">Quick Response</h3>
               <p className="text-muted-foreground mb-6">
                 Need a faster response? Let's chat directly!
               </p>
-              <button className="btn-neon">
+              <button 
+                className="btn-neon"
+                aria-label="Start a chat conversation"
+                onClick={() => {/* TODO: Implement chat functionality */}}
+              >
                 Start Chat
               </button>
             </div>
@@ -250,7 +273,7 @@ const Contact = () => {
               <h3 className="text-xl font-medium mb-6 text-center">
                 Connect on Social
               </h3>
-              <div ref={socialRef} className="flex justify-center space-x-6">
+              <div ref={socialRef} className="flex justify-center space-x-6" role="list" aria-label="Social media links">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -258,8 +281,10 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group p-4 glass-card hover:scale-110 transition-all duration-300 ${social.color}`}
+                    role="listitem"
+                    aria-label={`Visit ${social.name} profile`}
                   >
-                    <social.icon size={32} className="group-hover:animate-pulse" />
+                    <social.icon size={32} className="group-hover:animate-pulse" aria-hidden="true" />
                   </a>
                 ))}
               </div>

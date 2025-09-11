@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { ChevronRight, Folder, File, FolderOpen } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronRight, File, Folder, FolderOpen } from "lucide-react";
+import React, { useCallback, useState } from "react";
+
 import { cn } from "@/lib/utils";
 
 // Types
@@ -61,8 +62,8 @@ export function TreeView({
       setExpandedIds((prev) => {
         const newSet = new Set(prev);
         const isExpanded = newSet.has(nodeId);
-        isExpanded ? newSet.delete(nodeId) : newSet.add(nodeId);
-        onNodeExpand?.(nodeId, !isExpanded);
+        void (isExpanded ? newSet.delete(nodeId) : newSet.add(nodeId));
+        void onNodeExpand?.(nodeId, !isExpanded);
         return newSet;
       });
     },
@@ -83,9 +84,11 @@ export function TreeView({
         newSelection = currentSelectedIds.includes(nodeId) ? [] : [nodeId];
       }
 
-      isControlled
-        ? onSelectionChange?.(newSelection)
-        : setInternalSelectedIds(newSelection);
+      if (isControlled) {
+        onSelectionChange?.(newSelection);
+      } else {
+        setInternalSelectedIds(newSelection);
+      }
     },
     [
       selectable,

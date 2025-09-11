@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Code, 
-  PaintBrush, 
-  Lightning, 
-  Globe, 
-  Database, 
-  Cube 
+import {
+    Code,
+    Cube,
+    Database,
+    Globe,
+    Lightning,
+    PaintBrush
 } from 'phosphor-react';
+import { useEffect, useRef } from 'react';
+
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -148,10 +150,13 @@ const About = () => {
             <div className="relative w-80 h-80 mx-auto lg:mx-0">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 animate-pulse-glow" />
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/50 glass-card">
-                <img
+                <OptimizedImage
                   src="/lovable-uploads/550a1d39-cbee-4e6a-94dd-a13c432f62e2.png"
                   alt="Saaed Imam"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full hover:scale-110 transition-transform duration-700"
+                  priority
+                  placeholder="blur"
+                  sizes="(max-width: 768px) 200px, 300px"
                 />
               </div>
             </div>
@@ -180,7 +185,7 @@ const About = () => {
             <span className="text-neon-secondary">Skills</span> & Technologies
           </h3>
           <div ref={skillsRef} className="grid grid-cols-2 md:grid-cols-3 gap-8">
-            {skills.map((skill, index) => (
+            {skills.map((skill, _index) => (
               <div key={skill.name} className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
                 <div className="relative mb-4">
                   <skill.icon size={48} className="mx-auto text-primary group-hover:text-accent transition-colors duration-300" />
@@ -205,7 +210,7 @@ const About = () => {
             Career <span className="text-neon-accent">Timeline</span>
           </h3>
           <div ref={timelineRef} className="space-y-6 max-w-3xl mx-auto">
-            {timeline.map((item, index) => (
+            {timeline.map((item, _index) => (
               <div key={item.year} className="flex items-center space-x-6 glass-card p-6 hover:scale-105 transition-transform duration-300">
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">

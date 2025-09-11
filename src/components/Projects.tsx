@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
 import { ArrowRight, X, GithubLogo, Globe } from 'phosphor-react';
+import { useEffect, useRef, useState } from 'react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -195,10 +196,13 @@ const Projects = () => {
               onClick={() => openProject(project)}
             >
               <div className="relative overflow-hidden rounded-xl mb-4">
-                <img
+                <OptimizedImage
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-48 group-hover:scale-110 transition-transform duration-700"
+                  width={400}
+                  height={192}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -250,10 +254,13 @@ const Projects = () => {
                   onClick={() => openProject(project)}
                 >
                   <div className="relative overflow-hidden rounded-xl mb-4">
-                    <img
+                    <OptimizedImage
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-48 group-hover:scale-110 transition-transform duration-700"
+                      width={400}
+                      height={192}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="space-y-3">

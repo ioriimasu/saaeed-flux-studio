@@ -1,12 +1,10 @@
 'use client';
 
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import { useAspect, useTexture } from '@react-three/drei';
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import { useMemo, useRef, useState, useEffect } from 'react';
-import * as THREE from 'three/webgpu';
-import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
 import { Mesh } from 'three';
-
+import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
 import {
   abs,
   blendScreen,
@@ -24,6 +22,7 @@ import {
   mix,
   add
 } from 'three/tsl';
+import * as THREE from 'three/webgpu';
 
 const TEXTUREMAP = { src: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop&crop=center' };
 const DEPTHMAP = { src: 'https://images.unsplash.com/photo-1506905925346-04b1e767261a?w=800&h=600&fit=crop&crop=center' };
