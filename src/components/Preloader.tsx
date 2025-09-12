@@ -1,4 +1,3 @@
-import { gsap } from 'gsap';
 import { useEffect, useRef, useState } from 'react';
 
 interface PreloaderProps {
@@ -12,36 +11,101 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    
-    // Animate progress from 0 to 100
-    tl.to(progressBarRef.current, {
-      width: "100%",
-      duration: 2.5,
-      ease: "power2.out",
-      onUpdate: function() {
-        const progress = Math.round(this.progress() * 100);
-        setProgress(progress);
+    // Safety timeout to ensure preloader always completes
+    const safetyTimeout = setTimeout(() => {
+      console.warn('Preloader safety timeout triggered');
+      onComplete();
+    }, 10000); // 10 second safety timeout
+
+    // Fallback animation if GSAP fails to load
+    const animateProgress = () => {
+      let currentProgress = 0;
+      const duration = 2500; // 2.5 seconds
+      const startTime = Date.now();
+
+      const updateProgress = () => {
+        const elapsed = Date.now() - startTime;
+        currentProgress = Math.min((elapsed / duration) * 100, 100);
+        setProgress(Math.round(currentProgress));
+
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = `${currentProgress}%`;
+        }
+
+        if (currentProgress < 100) {
+          requestAnimationFrame(updateProgress);
+        } else {
+          // Complete animation
+          setTimeout(() => {
+            if (textRef.current) {
+              textRef.current.style.opacity = '0';
+              textRef.current.style.transform = 'translateY(-20px)';
+            }
+            
+            setTimeout(() => {
+              if (preloaderRef.current) {
+                preloaderRef.current.style.opacity = '0';
+                preloaderRef.current.style.transform = 'scale(0.9)';
+              }
+              
+              setTimeout(() => {
+                clearTimeout(safetyTimeout);
+                onComplete();
+              }, 1000);
+            }, 500);
+          }, 200);
+        }
+      };
+
+      requestAnimationFrame(updateProgress);
+    };
+
+    // Try to use GSAP if available, otherwise use fallback
+    const initAnimation = async () => {
+      try {
+        const { gsap } = await import('gsap');
+        const tl = gsap.timeline();
+        
+        // Animate progress from 0 to 100
+        tl.to(progressBarRef.current, {
+          width: "100%",
+          duration: 2.5,
+          ease: "power2.out",
+          onUpdate: function() {
+            const progress = Math.round(this.progress() * 100);
+            setProgress(progress);
+          }
+        })
+        .to(textRef.current, {
+          opacity: 0,
+          y: -20,
+          duration: 0.5,
+          ease: "power2.out"
+        }, "-=0.5")
+        .to(preloaderRef.current, {
+          opacity: 0,
+          scale: 0.9,
+          duration: 1,
+          ease: "power2.out",
+          onComplete: () => {
+            clearTimeout(safetyTimeout);
+            onComplete();
+          }
+        }, "-=0.2");
+
+        return () => {
+          tl.kill();
+        };
+      } catch (error) {
+        console.warn('GSAP not available, using fallback animation:', error);
+        animateProgress();
       }
-    })
-    .to(textRef.current, {
-      opacity: 0,
-      y: -20,
-      duration: 0.5,
-      ease: "power2.out"
-    }, "-=0.5")
-    .to(preloaderRef.current, {
-      opacity: 0,
-      scale: 0.9,
-      duration: 1,
-      ease: "power2.out",
-      onComplete: () => {
-        onComplete();
-      }
-    }, "-=0.2");
+    };
+
+    initAnimation();
 
     return () => {
-      tl.kill();
+      clearTimeout(safetyTimeout);
     };
   }, [onComplete]);
 
