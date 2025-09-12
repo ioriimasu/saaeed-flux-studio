@@ -94,7 +94,7 @@ export class ParticleSystem {
     this.mouse.y = -1000;
   };
 
-  private animate = (): void {
+  private animate = (): void => {
     if (!this.isActive || !this.ctx || !this.canvas) {
       this.animationId = requestAnimationFrame(this.animate);
       return;

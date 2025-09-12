@@ -1,14 +1,15 @@
-import smoothScrollAPI from '@/lib/scroll/smooth';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { destroySmoothScroll, initSmoothScroll } from '../../lib/scroll/smooth';
 import { navConfig } from './config';
 import { MenuButton } from './MenuButton';
 import { NavOverlay } from './NavOverlay';
 
 interface NavContextType {
   isOpen: boolean;
-  setOpen: (open: boolean) => void;
-  toggle: () => void;
+  setIsOpen: (open: boolean) => void;
+  toggleNav: () => void;
+  closeNav: () => void;
 }
 
 const NavContext = createContext<NavContextType | undefined>(undefined);
@@ -22,48 +23,74 @@ export const useNav = () => {
 };
 
 interface NavProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const NavProvider = ({ children }: NavProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Close overlay on route change
+  // Close nav on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
 
-  // Initialize smooth scrolling
+  // Initialize smooth scroll
   useEffect(() => {
     if (navConfig.smoothScroll.enabled) {
-      smoothScrollAPI.init();
+      initSmoothScroll({
+        offset: navConfig.smoothScroll.offset,
+        duration: navConfig.smoothScroll.duration,
+        easing: navConfig.smoothScroll.easing,
+      });
     }
 
     return () => {
-      smoothScrollAPI.destroy();
+      destroySmoothScroll();
     };
   }, []);
 
-  const setOpen = (open: boolean) => {
-    setIsOpen(open);
-  };
+  const toggleNav = () => setIsOpen(!isOpen);
+  const closeNav = () => setIsOpen(false);
 
-  const toggle = () => {
-    setIsOpen(prev => !prev);
+  const handleLinkClick = (href: string) => {
+    // Use the smooth scroll API if available
+    if ((window as any).IORI_SCROLL) {
+      (window as any).IORI_SCROLL.scrollTo(href);
+    } else {
+      // Fallback to native smooth scroll
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    closeNav();
   };
 
   const contextValue: NavContextType = {
     isOpen,
-    setOpen,
-    toggle,
+    setIsOpen,
+    toggleNav,
+    closeNav,
   };
 
   return (
     <NavContext.Provider value={contextValue}>
       {children}
-      <MenuButton isOpen={isOpen} onToggle={toggle} />
-      <NavOverlay isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      
+      {/* Hidden Navigation Components */}
+      <MenuButton 
+        isOpen={isOpen} 
+        onToggle={toggleNav}
+        size={navConfig.menuButton.size}
+        position={navConfig.menuButton.position}
+      />
+      
+      <NavOverlay 
+        isOpen={isOpen} 
+        onClose={closeNav}
+        onLinkClick={handleLinkClick}
+      />
     </NavContext.Provider>
   );
 };

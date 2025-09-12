@@ -1,35 +1,24 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MenuButton } from '../MenuButton';
 
-// Mock framer-motion to avoid animation issues in tests
-jest.mock('framer-motion', () => ({
-  motion: {
-    button: ({ children, onClick, ...props }: any) => (
-      <button onClick={onClick} {...props}>
-        {children}
-      </button>
-    ),
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-}));
-
 describe('MenuButton', () => {
-  const mockOnToggle = jest.fn();
+  const mockOnToggle = vi.fn();
 
   beforeEach(() => {
     mockOnToggle.mockClear();
   });
 
-  it('renders with correct accessibility attributes when closed', () => {
+  it('renders with correct accessibility attributes', () => {
     render(<MenuButton isOpen={false} onToggle={mockOnToggle} />);
     
     const button = screen.getByRole('button');
     expect(button).toHaveAttribute('aria-expanded', 'false');
-    expect(button).toHaveAttribute('aria-label', 'Open menu');
     expect(button).toHaveAttribute('aria-controls', 'iori-nav');
+    expect(button).toHaveAttribute('aria-label', 'Open menu');
   });
 
-  it('renders with correct accessibility attributes when open', () => {
+  it('updates accessibility attributes when open', () => {
     render(<MenuButton isOpen={true} onToggle={mockOnToggle} />);
     
     const button = screen.getByRole('button');
@@ -46,17 +35,18 @@ describe('MenuButton', () => {
     expect(mockOnToggle).toHaveBeenCalledTimes(1);
   });
 
-  it('has correct positioning classes', () => {
-    render(<MenuButton isOpen={false} onToggle={mockOnToggle} />);
+  it('applies custom size', () => {
+    render(<MenuButton isOpen={false} onToggle={mockOnToggle} size={64} />);
     
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('fixed', 'top-4', 'right-4');
+    expect(button.style.minWidth).toBe('64px');
+    expect(button.style.minHeight).toBe('64px');
   });
 
-  it('has correct size styling', () => {
-    render(<MenuButton isOpen={false} onToggle={mockOnToggle} />);
+  it('applies correct position classes', () => {
+    render(<MenuButton isOpen={false} onToggle={mockOnToggle} position="top-left" />);
     
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('h-14', 'w-14');
+    expect(button).toHaveClass('top-4', 'left-4');
   });
 });

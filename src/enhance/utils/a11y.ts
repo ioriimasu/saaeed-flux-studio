@@ -163,3 +163,6 @@ export const createAccessibleDiv = (
   
   return div;
 };
+
+// Re-export DOM utilities for convenience
+export { addClass, createElement, removeClass } from './dom';

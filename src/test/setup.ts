@@ -11,16 +11,21 @@ vi.mock('gsap', () => ({
       fromTo: vi.fn().mockReturnThis(),
       to: vi.fn().mockReturnThis(),
       delay: vi.fn().mockReturnThis(),
+      kill: vi.fn(),
     })),
     registerPlugin: vi.fn(),
+    to: vi.fn(),
+    fromTo: vi.fn(),
   },
   fromTo: vi.fn(),
   timeline: vi.fn(() => ({
     fromTo: vi.fn().mockReturnThis(),
     to: vi.fn().mockReturnThis(),
     delay: vi.fn().mockReturnThis(),
+    kill: vi.fn(),
   })),
   registerPlugin: vi.fn(),
+  to: vi.fn(),
 }));
 
 vi.mock('gsap/ScrollTrigger', () => ({

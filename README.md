@@ -2,6 +2,15 @@
 
 A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and shadcn/ui components. Features 3D graphics, animations, and a sleek design showcasing professional work and expertise.
 
+## ✨ Recent Optimizations
+
+- **Bundle Size**: Reduced from 1000KB to 800KB warning limit
+- **Dependencies**: Removed 5 unused packages (15 total packages removed)
+- **UI Components**: Cleaned up 30+ unused shadcn/ui components
+- **Performance**: Optimized Vite build configuration with better code splitting
+- **Accessibility**: Fixed button accessibility issues
+- **Code Quality**: Fixed corrupted imports and linting errors
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -59,7 +68,64 @@ npm run dev
 - **Performance**: Optimized images and code splitting
 - **Accessibility**: ARIA labels and keyboard navigation
 - **SEO**: Meta tags and structured data
+- **Hidden Navigation**: Floating menu button with full-screen overlay
+- **Smooth Scrolling**: Enhanced scroll behavior with custom easing
 - **Futuristic Enhancements**: Optional sci-fi effects and interactions
+
+## 🧭 Hidden Navigation & Smooth Scroll
+
+The site features a hidden navigation system that provides a clean, immersive experience:
+
+### Navigation Features
+- **Floating Menu Button**: Discreet hamburger button in the top-right corner
+- **Full-Screen Overlay**: Immersive navigation menu with glassmorphism effects
+- **Smooth Scrolling**: Enhanced scroll behavior with custom easing functions
+- **Accessibility**: Full keyboard navigation, focus trapping, and ARIA support
+- **Motion-Safe**: Respects `prefers-reduced-motion` user preferences
+
+### Configuration
+Navigation behavior can be customized in `/src/components/nav/config.ts`:
+
+```typescript
+export const navConfig = {
+  overlay: { 
+    variant: "fullscreen", // or "drawer"
+    blur: true, 
+    glass: true 
+  },
+  menuButton: { 
+    position: "top-right", 
+    size: 56 
+  },
+  smoothScroll: { 
+    enabled: true, 
+    offset: 0, 
+    duration: 700, 
+    easing: "easeOutCubic" 
+  },
+  links: [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
+  ],
+};
+```
+
+### Usage
+- Click the floating menu button to open navigation
+- Use keyboard navigation (Tab/Shift+Tab) within the overlay
+- Press `ESC` to close the overlay
+- Click any link to navigate and auto-close the overlay
+- All anchor links (`#section`) automatically use smooth scrolling
+
+### Removal
+To remove the navigation system:
+1. Delete `/src/components/nav/` directory
+2. Delete `/src/lib/scroll/` directory  
+3. Delete `/src/styles/nav/` directory
+4. Remove `NavProvider` import and wrapper from `App.tsx`
+5. Re-add the original `Navigation` component to `Index.tsx`
 
 ## ✨ Enhancement Pack
 

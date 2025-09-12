@@ -24,14 +24,15 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           vendor: ["react", "react-dom"],
-          ui: ["@radix-ui/react-accordion", "@radix-ui/react-alert-dialog", "@radix-ui/react-aspect-ratio"],
+          ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-tooltip"],
           three: ["three", "@react-three/fiber", "@react-three/drei"],
           animation: ["framer-motion", "gsap"],
+          swiper: ["swiper"],
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
-    assetsInlineLimit: 4096,
+    chunkSizeWarningLimit: 800,
+    assetsInlineLimit: 2048,
   },
   optimizeDeps: {
     include: ["react", "react-dom", "framer-motion", "gsap"],

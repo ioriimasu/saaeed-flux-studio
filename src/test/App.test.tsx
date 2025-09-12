@@ -1,13 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import App from '@/App';
 
 // Mock all the components
-vi.mock('@/components/Navigation', () => ({
-  default: () => <div data-testid="navigation">Navigation</div>,
-}));
-
 vi.mock('@/components/Hero', () => ({
   default: () => <div data-testid="hero">Hero</div>,
 }));
@@ -45,7 +41,6 @@ describe('App', () => {
   it('renders all main components', () => {
     render(<App />);
     
-    expect(screen.getByTestId('navigation')).toBeInTheDocument();
     expect(screen.getByTestId('hero')).toBeInTheDocument();
     expect(screen.getByTestId('about')).toBeInTheDocument();
     expect(screen.getByTestId('projects')).toBeInTheDocument();

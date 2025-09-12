@@ -111,3 +111,7 @@ export const querySelectorAll = <T extends HTMLElement = HTMLElement>(
 ): NodeListOf<T> => {
   return parent.querySelectorAll<T>(selector);
 };
+
+export const shouldReduceAnimations = (): boolean => {
+  return prefersReducedMotion();
+};

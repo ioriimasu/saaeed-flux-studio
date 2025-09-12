@@ -83,6 +83,7 @@ const Hero = () => {
 
   return (
     <section 
+      id="home"
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       role="banner"

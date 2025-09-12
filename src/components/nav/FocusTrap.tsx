@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 interface FocusTrapProps {
-  children: React.ReactNode;
+  children: ReactNode;
   active: boolean;
   onEscape?: () => void;
 }
@@ -35,19 +35,19 @@ export const FocusTrap = ({ children, active, onEscape }: FocusTrapProps) => {
         return;
       }
 
-      if (event.key !== 'Tab') return;
-
-      if (event.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === firstElement) {
-          event.preventDefault();
-          lastElement?.focus();
-        }
-      } else {
-        // Tab
-        if (document.activeElement === lastElement) {
-          event.preventDefault();
-          firstElement?.focus();
+      if (event.key === 'Tab') {
+        if (event.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement?.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement?.focus();
+          }
         }
       }
     };
@@ -65,7 +65,7 @@ export const FocusTrap = ({ children, active, onEscape }: FocusTrapProps) => {
   }, [active, onEscape]);
 
   return (
-    <div ref={containerRef} tabIndex={-1}>
+    <div ref={containerRef}>
       {children}
     </div>
   );

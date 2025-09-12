@@ -1,5 +1,3 @@
-import smoothScrollAPI from '@/lib/scroll/smooth';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { FocusTrap } from './FocusTrap';
 import { navConfig } from './config';
@@ -7,16 +5,18 @@ import { navConfig } from './config';
 interface NavOverlayProps {
   isOpen: boolean;
   onClose: () => void;
+  onLinkClick: (href: string) => void;
 }
 
-export const NavOverlay = ({ isOpen, onClose }: NavOverlayProps) => {
+export const NavOverlay = ({ isOpen, onClose, onLinkClick }: NavOverlayProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
-  const { overlay, links } = navConfig;
 
   useEffect(() => {
     if (isOpen) {
+      // Disable body scroll
       document.body.style.overflow = 'hidden';
     } else {
+      // Re-enable body scroll
       document.body.style.overflow = 'unset';
     }
 
@@ -25,14 +25,7 @@ export const NavOverlay = ({ isOpen, onClose }: NavOverlayProps) => {
     };
   }, [isOpen]);
 
-  const handleLinkClick = (href: string) => {
-    if (href.startsWith('#')) {
-      smoothScrollAPI.scrollTo(href);
-    } else if (href.startsWith('http')) {
-      window.open(href, '_blank', 'noopener,noreferrer');
-    }
-    onClose();
-  };
+  if (!isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
@@ -40,126 +33,84 @@ export const NavOverlay = ({ isOpen, onClose }: NavOverlayProps) => {
     }
   };
 
-  const overlayVariants = {
-    closed: { opacity: 0 },
-    open: { opacity: 1 },
-  };
-
-  const contentVariants = {
-    closed: { 
-      scale: 0.9, 
-      opacity: 0,
-      y: 20,
-    },
-    open: { 
-      scale: 1, 
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-  };
-
-  const linkVariants = {
-    closed: { opacity: 0, y: 20 },
-    open: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-  };
-
-  const containerClass = overlay.variant === 'drawer' 
-    ? 'fixed inset-y-0 right-0 w-full max-w-md z-50'
-    : 'fixed inset-0 z-50';
-
-  const panelClass = overlay.variant === 'drawer'
-    ? 'h-full w-full bg-background/95 backdrop-blur-xl border-l border-border'
-    : 'absolute inset-0 flex items-center justify-center';
-
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          ref={overlayRef}
-          className={containerClass}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-          variants={overlayVariants}
-          initial="closed"
-          animate="open"
-          exit="closed"
-          onClick={handleBackdropClick}
-        >
-          {overlay.variant === 'fullscreen' && (
-            <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
-          )}
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-[90] flex items-center justify-center"
+      onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nav-title"
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
+      
+      {/* Content */}
+      <FocusTrap active={isOpen} onEscape={onClose}>
+        <div className="relative z-10 text-center max-w-2xl mx-auto px-6">
+          <h2 id="nav-title" className="sr-only">Navigation Menu</h2>
           
-          <FocusTrap active={isOpen} onEscape={onClose}>
-            <motion.div
-              className={panelClass}
-              variants={contentVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-            >
-              <div className="w-full max-w-4xl mx-auto px-8 py-16">
-                <nav role="navigation" aria-label="Main navigation">
-                  <ul className="space-y-8">
-                    {links.map((link, index) => (
-                      <li key={link.label}>
-                        <motion.button
-                          onClick={() => handleLinkClick(link.href)}
-                          className="group w-full text-left"
-                          variants={linkVariants}
-                          initial="closed"
-                          animate="open"
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <span className="text-6xl md:text-8xl font-light text-foreground group-hover:text-primary transition-colors duration-300 block">
-                            {link.label}
-                          </span>
-                          <span className="text-lg text-muted-foreground group-hover:text-foreground transition-colors duration-300 block mt-2">
-                            {link.href.startsWith('#') 
-                              ? `Navigate to ${link.label.toLowerCase()} section`
-                              : `Open ${link.label} in new tab`
-                            }
-                          </span>
-                        </motion.button>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
+          {/* Logo */}
+          <div className="mb-16">
+            <div className="text-4xl md:text-6xl font-light tracking-wider">
+              <span className="text-neon-primary">S</span>
+              <span className="text-foreground">AAED</span>
+            </div>
+            <div className="text-lg text-muted-foreground mt-2">
+              Platform Architect · RFID · SaaS
+            </div>
+          </div>
 
-                {/* Additional content for fullscreen variant */}
-                {overlay.variant === 'fullscreen' && (
-                  <motion.div
-                    className="mt-16 pt-8 border-t border-border"
-                    variants={linkVariants}
-                    initial="closed"
-                    animate="open"
-                    transition={{ delay: links.length * 0.1 }}
-                  >
-                    <div className="text-center">
-                      <p className="text-muted-foreground text-lg">
-                        Press <kbd className="px-2 py-1 bg-muted rounded text-sm">ESC</kbd> to close
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          </FocusTrap>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          {/* Navigation Links */}
+          <nav className="space-y-6" role="menu">
+            {navConfig.links.map((link, index) => (
+              <button
+                key={link.href}
+                onClick={() => onLinkClick(link.href)}
+                className="
+                  block w-full text-3xl md:text-4xl font-light
+                  text-muted-foreground hover:text-foreground
+                  transition-all duration-300 hover:scale-105
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                  rounded-lg px-6 py-4
+                "
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  minHeight: '56px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                } as React.CSSProperties}
+                role="menuitem"
+                aria-label={`Navigate to ${link.label} section`}
+              >
+                {link.label}
+              </button>
+            ))}
+            
+            {/* Hire Me Button */}
+            <div className="mt-12">
+              <button
+                onClick={() => onLinkClick('#contact')}
+                className="
+                  btn-neon text-primary-foreground text-xl px-12 py-4
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+                  transition-all duration-300 hover:scale-105
+                "
+                role="menuitem"
+                aria-label="Navigate to contact section to hire me"
+              >
+                Hire Me
+              </button>
+            </div>
+          </nav>
+
+          {/* Close hint */}
+          <div className="mt-16 text-sm text-muted-foreground">
+            Press <kbd className="px-2 py-1 bg-muted/30 rounded text-xs">ESC</kbd> to close
+          </div>
+        </div>
+      </FocusTrap>
+    </div>
   );
 };

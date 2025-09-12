@@ -40,8 +40,8 @@ describe('OptimizedImage', () => {
       />
     );
     
-    // Since intersection observer is mocked, the image won't render immediately
-    expect(screen.getByText('Failed to load image')).toBeInTheDocument();
+    // Should show loading skeleton when not in view
+    expect(screen.getByRole('img', { hidden: true })).toBeInTheDocument();
   });
 
   it('shows loading skeleton while image loads', () => {
@@ -54,7 +54,9 @@ describe('OptimizedImage', () => {
       />
     );
     
-    expect(screen.getByText('Failed to load image')).toBeInTheDocument();
+    // Should show loading skeleton
+    const container = screen.getByRole('img', { hidden: true }).parentElement;
+    expect(container?.querySelector('.animate-pulse')).toBeInTheDocument();
   });
 
   it('shows error state when image fails to load', async () => {
@@ -64,8 +66,13 @@ describe('OptimizedImage', () => {
         alt="Test image"
         width={200}
         height={200}
+        priority
       />
     );
+    
+    // Simulate image error
+    const img = screen.getByAltText('Test image');
+    img.dispatchEvent(new Event('error'));
     
     await waitFor(() => {
       expect(screen.getByText('Failed to load image')).toBeInTheDocument();
@@ -80,10 +87,11 @@ describe('OptimizedImage', () => {
         width={200}
         height={200}
         className="custom-class"
+        priority
       />
     );
     
-    const container = screen.getByText('Failed to load image').parentElement;
+    const container = screen.getByRole('img', { hidden: true }).parentElement;
     expect(container).toHaveClass('custom-class');
   });
 });
