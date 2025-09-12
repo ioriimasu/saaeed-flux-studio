@@ -1,5 +1,7 @@
+'use client';
+
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { destroySmoothScroll, initSmoothScroll } from '../../lib/scroll/smooth';
 import { navConfig } from './config';
 import { MenuButton } from './MenuButton';
@@ -28,12 +30,12 @@ interface NavProviderProps {
 
 export const NavProvider = ({ children }: NavProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   // Close nav on route change
   useEffect(() => {
     setIsOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   // Initialize smooth scroll
   useEffect(() => {
@@ -55,7 +57,7 @@ export const NavProvider = ({ children }: NavProviderProps) => {
 
   const handleLinkClick = (href: string) => {
     // Use the smooth scroll API if available
-    if ((window as any).IORI_SCROLL) {
+    if (typeof window !== 'undefined' && (window as any).IORI_SCROLL) {
       (window as any).IORI_SCROLL.scrollTo(href);
     } else {
       // Fallback to native smooth scroll

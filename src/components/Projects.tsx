@@ -102,36 +102,42 @@ const Projects = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Section header animation
-      gsap.fromTo(sectionRef.current?.querySelector('h2'),
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          }
-        }
-      );
-
-      // Desktop grid animation
-      if (window.innerWidth >= 1024) {
-        gsap.fromTo(gridRef.current?.children || [],
-          { opacity: 0, y: 100, scale: 0.8 },
+      const h2Element = sectionRef.current?.querySelector('h2');
+      if (h2Element) {
+        gsap.fromTo(h2Element,
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
+            duration: 1,
             scrollTrigger: {
-              trigger: gridRef.current,
+              trigger: sectionRef.current,
               start: "top 80%",
             }
           }
         );
+      }
+
+      // Desktop grid animation
+      if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+        const gridChildren = gridRef.current?.children;
+        if (gridChildren) {
+          gsap.fromTo(Array.from(gridChildren),
+            { opacity: 0, y: 100, scale: 0.8 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: gridRef.current,
+                start: "top 80%",
+              }
+            }
+          );
+        }
       }
     });
 

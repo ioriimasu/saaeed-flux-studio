@@ -1,11 +1,11 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-    ChatCircle,
-    EnvelopeSimple,
-    GithubLogo,
-    LinkedinLogo,
-    PaperPlaneTilt
+  ChatCircle,
+  EnvelopeSimple,
+  GithubLogo,
+  LinkedinLogo,
+  PaperPlaneTilt
 } from 'phosphor-react';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -160,7 +160,7 @@ const Contact = () => {
                   type="text"
                   placeholder="Your Name"
                   className="input-glass"
-                  aria-invalid={!!errors.name}
+                  aria-invalid={errors.name ? 'true' : 'false'}
                   aria-describedby={errors.name ? "name-error" : undefined}
                 />
                 {errors.name && (
@@ -182,7 +182,7 @@ const Contact = () => {
                   type="email"
                   placeholder="Your Email"
                   className="input-glass"
-                  aria-invalid={!!errors.email}
+                  aria-invalid={errors.email ? 'true' : 'false'}
                   aria-describedby={errors.email ? "email-error" : undefined}
                 />
                 {errors.email && (
@@ -198,7 +198,7 @@ const Contact = () => {
                   placeholder="Your Message"
                   rows={6}
                   className="input-glass resize-none"
-                  aria-invalid={!!errors.message}
+                  aria-invalid={errors.message ? 'true' : 'false'}
                   aria-describedby={errors.message ? "message-error" : undefined}
                 />
                 {errors.message && (

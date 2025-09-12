@@ -110,7 +110,7 @@ const Navigation = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={isOpen}
+              aria-expanded={isOpen ? 'true' : 'false'}
               aria-controls="mobile-menu"
             >
               {isOpen ? <X size={24} /> : <List size={24} />}
@@ -127,6 +127,7 @@ const Navigation = () => {
           aria-modal="true"
           aria-labelledby="mobile-menu-title"
         >
+          <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation Menu</h2>
           <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
           <div 
             ref={menuRef}
@@ -135,13 +136,11 @@ const Navigation = () => {
             role="menu"
             aria-label="Mobile navigation menu"
           >
-            <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation Menu</h2>
             {navItems.map((item, index) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-3xl text-muted-foreground hover:text-foreground transition-colors duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`text-3xl text-muted-foreground hover:text-foreground transition-colors duration-300 nav-item-delay-${index}`}
                 role="menuitem"
                 aria-label={`Navigate to ${item.name} section`}
               >

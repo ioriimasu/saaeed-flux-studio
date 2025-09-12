@@ -276,3 +276,11 @@
     border: 2px solid hsl(var(--foreground));
   }
 }
+
+/* Animation delay classes for mobile menu items */
+.nav-item-delay-0 { animation-delay: 0s; }
+.nav-item-delay-1 { animation-delay: 0.1s; }
+.nav-item-delay-2 { animation-delay: 0.2s; }
+.nav-item-delay-3 { animation-delay: 0.3s; }
+.nav-item-delay-4 { animation-delay: 0.4s; }
+.nav-item-delay-5 { animation-delay: 0.5s; }
