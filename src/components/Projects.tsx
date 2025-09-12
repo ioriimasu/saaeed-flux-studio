@@ -100,6 +100,8 @@ const Projects = () => {
   ];
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const ctx = gsap.context(() => {
       // Section header animation
       const h2Element = sectionRef.current?.querySelector('h2');

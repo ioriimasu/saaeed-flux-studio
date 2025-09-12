@@ -12,8 +12,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 // import "../styles/enhance.css";
 
 // Import navigation system
-import { NavProvider } from "./nav/NavProvider";
 import "../styles/nav/overlay.css";
+import { NavProvider } from "./nav/NavProvider";
 
 const queryClient = new QueryClient();
 

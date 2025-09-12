@@ -32,6 +32,8 @@ const About = () => {
 
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const ctx = gsap.context(() => {
       // Section fade in
       gsap.fromTo(sectionRef.current,

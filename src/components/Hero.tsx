@@ -17,6 +17,8 @@ const Hero = () => {
   ];
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     // Initial animations
     const tl = gsap.timeline({ delay: 0.5 });
     

@@ -10,6 +10,8 @@ const Footer = () => {
   const particlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const ctx = gsap.context(() => {
       // Footer slide up animation
       gsap.fromTo(footerRef.current,

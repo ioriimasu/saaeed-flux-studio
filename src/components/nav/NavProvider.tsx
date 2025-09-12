@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { destroySmoothScroll, initSmoothScroll } from '../../lib/scroll/smooth';
 import { navConfig } from './config';
 import { MenuButton } from './MenuButton';

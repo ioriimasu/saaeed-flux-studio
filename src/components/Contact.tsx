@@ -29,6 +29,8 @@ const Contact = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const ctx = gsap.context(() => {
       // Section animation
       gsap.fromTo(sectionRef.current,
