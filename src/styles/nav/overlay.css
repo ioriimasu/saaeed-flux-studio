@@ -156,8 +156,10 @@
   top: 1rem;
   right: 1rem;
   z-index: 100;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: var(--button-size, 3.5rem);
+  height: var(--button-size, 3.5rem);
+  min-width: var(--button-size, 3.5rem);
+  min-height: var(--button-size, 3.5rem);
   border-radius: 50%;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);

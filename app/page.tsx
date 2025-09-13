@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { AppWrapper } from '../src/components/AppWrapper';
 
 // Dynamically import components that use browser APIs

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GithubLogo, LinkedinLogo, EnvelopeSimple, QrCode } from 'phosphor-react';
+import { EnvelopeSimple, GithubLogo, LinkedinLogo, QrCode } from 'phosphor-react';
 import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
