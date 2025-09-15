@@ -2,15 +2,15 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { AppWrapper } from '../src/components/AppWrapper';
+import { AppWrapper } from '../components/AppWrapper';
 
 // Dynamically import components that use browser APIs
-const About = dynamic(() => import('../src/components/About'), { ssr: false });
-const Contact = dynamic(() => import('../src/components/Contact'), { ssr: false });
-const Footer = dynamic(() => import('../src/components/Footer'), { ssr: false });
-const Hero = dynamic(() => import('../src/components/Hero'), { ssr: false });
-const Preloader = dynamic(() => import('../src/components/Preloader'), { ssr: false });
-const Projects = dynamic(() => import('../src/components/Projects'), { ssr: false });
+const About = dynamic(() => import('../components/About'), { ssr: false });
+const Contact = dynamic(() => import('../components/Contact'), { ssr: false });
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
+const Hero = dynamic(() => import('../components/Hero'), { ssr: false });
+const Preloader = dynamic(() => import('../components/Preloader'), { ssr: false });
+const Projects = dynamic(() => import('../components/Projects'), { ssr: false });
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);

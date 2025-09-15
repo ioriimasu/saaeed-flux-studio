@@ -5,6 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://saaedimam.dev'),
   title: 'Saaed Imam - Platform Architect · RFID · SaaS',
   description: 'Platform Architect specializing in RFID/IoT systems, scalable SaaS platforms, and industrial analytics. Building systems that compound: real-time RFID, mission-critical SaaS, and factory intelligence.',
   keywords: 'platform architect, RFID systems, SaaS architecture, IoT development, industrial analytics, factory intelligence, Next.js, Supabase, Stripe, Python, Bangladesh',
