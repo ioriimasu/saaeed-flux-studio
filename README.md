@@ -1,62 +1,59 @@
-# IORIIMASU
+# SAAEED FLUX STUDIO
 
-A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and shadcn/ui components. Features 3D graphics, animations, and a sleek design showcasing professional work and expertise.
+A modern, responsive portfolio website built with Next.js 14, React, TypeScript, Tailwind CSS, and shadcn/ui components. Features 3D graphics, animations, and a sleek design showcasing professional work and expertise.
 
-## ✨ Recent Optimizations
+## ✨ Recent Migration & Optimizations
 
-- **Bundle Size**: Reduced from 1000KB to 800KB warning limit
-- **Dependencies**: Removed 5 unused packages (15 total packages removed)
-- **UI Components**: Cleaned up 30+ unused shadcn/ui components
-- **Performance**: Optimized Vite build configuration with better code splitting
-- **Accessibility**: Fixed button accessibility issues
-- **Code Quality**: Fixed corrupted imports and linting errors
+- **Framework Migration**: Successfully migrated from Vite to Next.js 14 with App Router
+- **Production Hardening**: Added comprehensive security headers, error boundaries, and SEO optimization
+- **Bundle Analysis**: Integrated @next/bundle-analyzer for performance monitoring
+- **Health Monitoring**: Added /api/health endpoint for deployment monitoring
+- **CI/CD Pipeline**: GitHub Actions workflow with typecheck → lint → build
+- **Node.js Constraints**: Pinned to Node 18.17+ for deployment consistency
+- **Security**: Enhanced headers with HSTS, COOP, and Permissions-Policy
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18.17+ (pinned for deployment consistency)
+- npm (recommended) or yarn
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd ioriimasu
+git clone https://github.com/ioriimasu/saaeed-flux-studio.git
+cd saaeed-flux-studio
 
 # Install dependencies
-npm install
+npm ci
 
 # Start development server
 npm run dev
 ```
 
+Visit [http://localhost:3000](http://localhost:3000) to view the application.
+
 ## 📜 Available Scripts
 
-- `npm run dev` - Start development server
+- `npm run dev` - Start Next.js development server
 - `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
-- `npm run test` - Run tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:ui` - Run tests with UI
+- `npm run start` - Start production server
+- `npm run lint` - Run Next.js ESLint
+- `npm run analyze` - Analyze bundle size with @next/bundle-analyzer
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
+- **Framework**: Next.js 14 with App Router
+- **Runtime**: React 18 with TypeScript
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
 - **3D Graphics**: Three.js, @react-three/fiber, @react-three/drei
 - **Animations**: GSAP, Framer Motion
 - **Icons**: Lucide React
-- **Testing**: Vitest, React Testing Library
-- **Code Quality**: ESLint, Prettier, Husky
+- **Code Quality**: ESLint, TypeScript
+- **Deployment**: Vercel (optimized)
 
 ## 🎨 Features
 
